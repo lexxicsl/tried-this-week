@@ -1,0 +1,39 @@
+---
+import Base from "../../layouts/Base.astro";
+import { withBase } from "../../lib/site";
+
+const description =
+  "Archive of Tried This Week issues. The first hands-on lab issue is coming soon. No keep-or-drop verdicts have been published yet.";
+---
+
+<Base title="Issues" description={description} path="/issues/">
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">Archive</p>
+      <h1>Issues</h1>
+      <p class="lead">
+        Every lab issue will live here, in full, with no signup wall. You can share a link without
+        asking anyone to subscribe.
+      </p>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap">
+      <article class="coming-soon" aria-labelledby="coming-soon-heading">
+        <p class="kicker">Issue 01</p>
+        <h2 id="coming-soon-heading">First issue coming soon</h2>
+        <p>
+          We have not published a lab issue yet. When Issue 1 ships, it will include three tools
+          actually installed in Godot, Unity, or a web-game stack — or clearly labeled Reported if
+          a test could not be finished. This page will not be backfilled with unverified verdicts.
+        </p>
+        <p>
+          Want the format in the meantime? Read <a href={withBase("/about/")}>how tools are tested</a>,
+          or <a href={`${withBase("/")}#signup`}>leave this tab open for the list</a> once signup is
+          connected.
+        </p>
+      </article>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,82 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE, withBase } from "../lib/site";
+
+const description =
+  "Affiliate, sponsor, and privacy disclosures for Tried This Week. Verdicts cannot be bought. Sponsored items and affiliate links will be labeled when they exist. None are live yet.";
+---
+
+<Base title="Disclosures" description={description} path="/disclosures/">
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">Legal and money</p>
+      <h1>How we will handle sponsors, affiliates, and your email.</h1>
+      <p class="lead">
+        This page is the source of truth for money and tracking on {SITE.name}. If a practice here
+        and a line in an issue ever disagree, this page wins until we correct the issue.
+      </p>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap prose">
+      <h2>The short version</h2>
+      <p>
+        <strong>We do not have sponsors, affiliate links, or a live email list yet.</strong>
+        When those exist, they will be labeled. A payment, a gift, or a free account cannot buy a
+        Keep verdict or hide a Drop.
+      </p>
+
+      <h2>Advertising and sponsors</h2>
+      <p>
+        A future issue may include one clearly labeled sponsor slot, kept out of the verdict. The
+        word “Sponsored” will appear on the placement in the email and on the web. Sponsor copy is
+        not a lab result. We will not present a paid placement as a Tried card.
+      </p>
+      <p>
+        We do not plan to sell sponsor slots until the list has a real, engaged readership and a few
+        clean issues with click data. Until then, there is nothing to buy.
+      </p>
+
+      <h2>Affiliate links</h2>
+      <p>
+        Some tool links may later use affiliate programs. If a link can earn a commission, it will
+        be marked as an affiliate link on the issue and, where practical, on the link itself. We
+        will only affiliate tools we have actually tried, and only after a program is approved.
+        Free trials often do not pay, and refunds can claw back commissions — we will not pretend
+        otherwise.
+      </p>
+      <p>
+        As of the launch of this site, <strong>there are no affiliate links</strong> on {SITE.name}.
+      </p>
+
+      <h2>Independence of verdicts</h2>
+      <p>
+        Keep and Drop are editorial. They describe a specific job and stack, not a global ranking.
+        A vendor cannot pay to change a stamp. If we made a factual error, we will correct it in
+        public.
+      </p>
+
+      <h2>Privacy and the signup form</h2>
+      <p>
+        The email form on the home page is a placeholder for a future Beehiiv or Substack embed. It
+        is disabled on purpose. <strong>We do not collect, store, or send email addresses through
+        that form.</strong> This site is a static GitHub Pages project and does not include an
+        analytics script at launch.
+      </p>
+      <p>
+        When a newsletter platform is connected, that provider’s privacy policy will apply to
+        subscribers, and we will update this page with the provider’s name, what is collected, and
+        how to unsubscribe. Issues will remain published on the web without a signup wall.
+      </p>
+
+      <h2>Questions and corrections</h2>
+      <p>
+        For a correction, takedown, or disclosure question, open an issue on the
+        <a href={SITE.github}>GitHub repository</a>. Related pages:
+        <a href={withBase("/about/")}>methodology</a> and the
+        <a href={withBase("/issues/")}>issues archive</a>.
+      </p>
+    </div>
+  </section>
+</Base>

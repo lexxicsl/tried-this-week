@@ -1,0 +1,96 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE, withBase } from "../lib/site";
+
+const description =
+  "How Tried This Week tests AI tools: a fixed install checklist in Godot, Unity, or a web-game stack, honest Tried vs Reported labels, and keep-or-drop verdicts that cannot be bought.";
+---
+
+<Base title="About and methodology" description={description} path="/about/">
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">About</p>
+      <h1>The method is the product.</h1>
+      <p class="lead">
+        Tried This Week is a weekly lab for indie game makers who vibe-code. We do not summarize
+        launch posts. We install the tool, try it on a real job, and write down what happened.
+      </p>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top: 0;">
+    <div class="wrap prose">
+      <h2>Who it is for</h2>
+      <p>
+        Solo and tiny-team indie game makers who also vibe-code. You might work in Cursor, Claude
+        Code, or a similar agent, and in Godot, Unity, Unreal, Roblox, or a web stack. You need to
+        know what is shippable, what the free tier actually allows, and what to write in a Steam or
+        itch.io AI disclosure.
+      </p>
+      <p>
+        Secondary readers, same issue and voice: agent builders and vibe coders shipping non-game
+        side projects. The lead is always games, so the lab stays distinct.
+      </p>
+
+      <h2>How a tool gets tested</h2>
+      <p>Every Tried item goes through the same checklist:</p>
+      <ul>
+        <li>Install it in Godot, Unity, or a web-game project, named on the card.</li>
+        <li>Give it one real job: a tiny scene, a sprite pipeline, an NPC, audio, or a build step.</li>
+        <li>Record what shipped, what broke, and how long the install actually took.</li>
+        <li>Capture the plan, the price, and free-tier limits from the vendor’s own pages.</li>
+        <li>
+          Note commercial-use, training, license, and store-disclosure implications, with links to
+          the source terms.
+        </li>
+        <li>Stamp Keep or Drop for that job and stack, and link to an artifact when we have one.</li>
+      </ul>
+
+      <div class="method-grid">
+        <article class="card">
+          <p class="card-index">Tried</p>
+          <h3>We installed it</h3>
+          <p>The tool ran in a real project on the test machine. The notes come from that install.</p>
+        </article>
+        <article class="card">
+          <p class="card-index">Reported</p>
+          <h3>We only read the source</h3>
+          <p>
+            Public docs, pricing, or coverage, cited. Useful context, not a lab result. If a tool
+            needs a paid plan or an engine we cannot drive, it stays Reported or it waits.
+          </p>
+        </article>
+      </div>
+
+      <h2>What we will not do</h2>
+      <ul>
+        <li>We will not imply a test that did not happen.</li>
+        <li>We will not sell a Keep verdict, or let a sponsor sit inside the verdict slot.</li>
+        <li>We will not bury affiliate or sponsor labels. See the <a href={withBase("/disclosures/")}>Disclosures</a> page.</li>
+        <li>We will not treat a directory listing or a launch thread as evidence the tool works in a game.</li>
+      </ul>
+
+      <h2>The weekly issue</h2>
+      <p>Each issue is meant to be read in about six minutes, on Monday, and on the web with no signup wall:</p>
+      <ul>
+        <li>A one-line brief: the only thing that should change your stack this week.</li>
+        <li>Three tool cards, labeled Tried or Reported, with Keep or Drop when we installed them.</li>
+        <li>The micro-project we actually attempted, with a short clip or repo when we have one.</li>
+        <li>A skip list: hyped releases we are not installing, and why, each with a source link.</li>
+        <li>A clearly labeled sponsor slot, once one is sold.</li>
+        <li>An ask: what should we install next week?</li>
+      </ul>
+
+      <h2>Who runs the lab</h2>
+      <p>
+        {SITE.name} is an independent project. There is no parent media company and, at launch, no
+        sponsors or affiliate relationships. The site is open source at
+        <a href={SITE.github}>{SITE.github.replace("https://", "")}</a>.
+      </p>
+      <p>
+        <a href={`${withBase("/")}#signup`}>Get the issue when the list opens</a>, or start with the
+        <a href={withBase("/issues/")}>issues archive</a>.
+      </p>
+    </div>
+  </section>
+</Base>

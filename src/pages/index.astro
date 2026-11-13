@@ -1,0 +1,172 @@
+---
+import Signup from "../components/Signup.astro";
+import Base from "../layouts/Base.astro";
+import { FAQ, SITE, absoluteUrl, withBase } from "../lib/site";
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    name: SITE.name,
+    url: SITE.origin,
+    description: SITE.description,
+    logo: absoluteUrl("/favicon.svg"),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    name: SITE.name,
+    url: SITE.origin,
+    description: SITE.description,
+    inLanguage: "en",
+    publisher: { "@type": "Organization", name: SITE.name, url: SITE.origin },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQ.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  },
+];
+---
+
+<Base path="/" jsonLd={jsonLd}>
+  <section class="hero">
+    <div class="wrap">
+      <p class="kicker">Weekly lab · Indie game makers who vibe-code</p>
+      <h1 class="display">We installed it in a game project this week.</h1>
+      <p class="lead">
+        New AI tools look great in a launch post and fall apart in a real project. Each Monday we
+        install three of them in Godot, Unity, or a web-game stack, then publish a keep-or-drop
+        verdict plus the commercial-use and store-disclosure notes your Steam or itch.io page will need.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href={`${withBase("/")}#signup`}>Get the issue</a>
+        <a class="btn btn-ghost" href={withBase("/about/")}>Read the method</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="wrap">
+    <dl class="status-strip">
+      <div>
+        <dt>Lab status</dt>
+        <dd>Open, first issue in progress</dd>
+      </div>
+      <div>
+        <dt>Cadence</dt>
+        <dd>Mondays, about six minutes</dd>
+      </div>
+      <div>
+        <dt>Latest issue</dt>
+        <dd>Coming soon</dd>
+      </div>
+    </dl>
+  </div>
+
+  <section class="section" aria-labelledby="format-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="kicker">What you get</p>
+          <h2 id="format-heading">Three tools. One micro-project. An honest stamp.</h2>
+        </div>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <p class="card-index">01 · Tried or Reported</p>
+          <h3>Installed, or clearly not</h3>
+          <p>
+            Tried means it ran in a real game project. Reported means we only read the source. We
+            never blur those labels.
+          </p>
+          <div class="stamps" aria-hidden="true">
+            <span class="stamp stamp-tried">Tried</span>
+            <span class="stamp stamp-reported">Reported</span>
+          </div>
+        </article>
+        <article class="card">
+          <p class="card-index">02 · The bench</p>
+          <h3>Keep or drop</h3>
+          <p>
+            Each card covers the job, the engine, the plan and price, what broke, and whether it stays
+            in the stack. Money cannot buy this stamp.
+          </p>
+          <div class="stamps" aria-hidden="true">
+            <span class="stamp stamp-keep">Keep</span>
+            <span class="stamp stamp-drop">Drop</span>
+          </div>
+        </article>
+        <article class="card">
+          <p class="card-index">03 · Ship notes</p>
+          <h3>Commercial use &amp; stores</h3>
+          <p>
+            Free-tier limits, training and license terms, and what you would need to disclose on a
+            store page. The part directories usually skip.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="how-heading" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="kicker">How a week works</p>
+          <h2 id="how-heading">A fixed checklist, not a link dump.</h2>
+        </div>
+      </div>
+      <div class="cards">
+        <article class="card">
+          <p class="card-index">Shortlist</p>
+          <h3>Pick three for a real job</h3>
+          <p>
+            Candidates come from public launches and your requests. We only take tools with public
+            docs and a clear license, then pick a tiny scene, sprite pipeline, NPC, or build to attempt.
+          </p>
+        </article>
+        <article class="card">
+          <p class="card-index">Install</p>
+          <h3>Run it in the stack</h3>
+          <p>
+            Install, one real task, notes, errors, pricing, and commercial-use terms from the vendor
+            page. If we cannot finish the test honestly, we do not invent a result.
+          </p>
+        </article>
+        <article class="card">
+          <p class="card-index">Publish</p>
+          <h3>Monday, on the web and email</h3>
+          <p>
+            The issue stays public. A skip list covers hyped releases we did not install, each with a
+            source link. You can ask us to try something next week.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <Signup />
+
+  <section class="section" aria-labelledby="faq-heading">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="kicker">FAQ</p>
+          <h2 id="faq-heading">Short answers, same rules as the lab.</h2>
+        </div>
+      </div>
+      <div class="faq-list">
+        {FAQ.map((item) => (
+          <details>
+            <summary>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
