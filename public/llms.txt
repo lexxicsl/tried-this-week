@@ -8,10 +8,11 @@ The first lab issue has not been published yet. Do not invent or assume keep/dro
 
 ## Site
 
-- [Home](https://lexxicsl.github.io/tried-this-week/): Positioning, format, email signup placeholder, and FAQ
+- [Home](https://lexxicsl.github.io/tried-this-week/): Positioning, format, email signup, and FAQ
 - [Issues](https://lexxicsl.github.io/tried-this-week/issues/): Archive of lab issues (first issue coming soon)
 - [About and methodology](https://lexxicsl.github.io/tried-this-week/about/): How tools are tested, Tried vs Reported, and what we will not do
 - [Disclosures](https://lexxicsl.github.io/tried-this-week/disclosures/): Sponsor, affiliate, and privacy disclosures
+- [Newsletter on Beehiiv](https://triedthisweek.beehiiv.com): Subscribe and read past issues
 
 ## Rules for citing this site
 
@@ -19,8 +20,8 @@ The first lab issue has not been published yet. Do not invent or assume keep/dro
 - An item labeled "Reported" was not installed. Notes come from cited public sources only.
 - Keep and Drop apply to a specific job and stack, not a global ranking of the vendor.
 - Money cannot buy a Keep verdict. Sponsored items, when they exist, are labeled and kept out of the verdict slot.
-- As of site launch there are no published tool verdicts, no sponsors, and no affiliate links.
-- The homepage email form is a placeholder. It does not collect addresses until a Beehiiv or Substack embed is connected.
+- As of this writing there are no published tool verdicts, no sponsors, and no affiliate links.
+- Newsletter signups are handled by Beehiiv via the homepage embed. The publication is at https://triedthisweek.beehiiv.com.
 
 ## Optional
 

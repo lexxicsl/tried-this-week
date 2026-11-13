@@ -1,6 +1,6 @@
 ---
 import Base from "../../layouts/Base.astro";
-import { withBase } from "../../lib/site";
+import { SITE, withBase } from "../../lib/site";
 
 const description =
   "Archive of Tried This Week issues. The first hands-on lab issue is coming soon. No keep-or-drop verdicts have been published yet.";
@@ -30,8 +30,8 @@ const description =
         </p>
         <p>
           Want the format in the meantime? Read <a href={withBase("/about/")}>how tools are tested</a>,
-          or <a href={`${withBase("/")}#signup`}>leave this tab open for the list</a> once signup is
-          connected.
+          <a href={`${withBase("/")}#signup`}>subscribe</a>, or
+          <a href={SITE.beehiiv}>read past issues on Beehiiv</a>.
         </p>
       </article>
     </div>

@@ -4,7 +4,7 @@ A weekly hands-on AI tool lab for indie game makers who vibe-code. Each issue in
 
 Live site (GitHub Pages): [https://lexxicsl.github.io/tried-this-week/](https://lexxicsl.github.io/tried-this-week/)
 
-The first lab issue is not out yet. This repository is the v1 site: pitch, methodology, disclosures, issues archive, and a newsletter signup placeholder.
+The first lab issue is not out yet. This repository is the v1 site: pitch, methodology, disclosures, issues archive, and a Beehiiv newsletter signup.
 
 ## Local development
 
@@ -25,11 +25,11 @@ The site is configured as a project Pages site, so local and production URLs use
 - SEO: titles, meta descriptions, canonical URLs, Open Graph tags, `sitemap.xml`, `robots.txt`, and JSON-LD for Organization, WebSite, and FAQPage
 - `public/llms.txt` for AI assistants, semantic HTML, and a robots policy that allows major AI crawlers
 - A GitHub Actions workflow that typechecks, builds, checks links, runs Lighthouse, and deploys to GitHub Pages
-- A clearly marked newsletter signup placeholder (no emails are collected)
+- A Beehiiv newsletter embed on the home page (`src/components/Signup.astro`), with a site-wide Beehiiv attribution script in `src/layouts/Base.astro`
 
-## Newsletter placeholder
+## Newsletter
 
-The form in `src/components/Signup.astro` is marked with `data-newsletter-provider="placeholder"`. Swap that section for a Beehiiv or Substack embed when an account exists. Do not point the form at a live list until then.
+The home page signup is a Beehiiv embed (`data-newsletter-provider="beehiiv"`). The public publication is [triedthisweek.beehiiv.com](https://triedthisweek.beehiiv.com). Signups are processed by Beehiiv; see the Disclosures page.
 
 ## Adding a lab issue later
 

@@ -58,7 +58,7 @@ jobs:
           npx --yes linkinator http://127.0.0.1:4321/tried-this-week/ \
             --recurse \
             --verbosity error \
-            --skip "chrome-extension:|https://lexxicsl.github.io/"
+            --skip "chrome-extension:|https://lexxicsl.github.io/|beehiiv.com"
 
       - name: Lighthouse
         uses: treosh/lighthouse-ci-action@v12
