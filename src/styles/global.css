@@ -567,6 +567,24 @@ a:hover {
   min-height: 1.3em;
 }
 
+.signup-embed {
+  margin-top: 1.25rem;
+  min-height: 8rem;
+}
+
+.signup-embed noscript p {
+  margin: 0.8rem 0 0;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.signup-aside {
+  margin: 1rem 0 0;
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.02em;
+}
+
 .faq-list {
   display: grid;
   gap: 0.65rem;
