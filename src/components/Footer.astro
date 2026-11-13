@@ -1,0 +1,40 @@
+---
+import { NAV, SITE, withBase } from "../lib/site";
+
+const llmsHref = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/llms.txt`;
+---
+
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <h2>{SITE.name}</h2>
+      <p>
+        A weekly hands-on lab for indie game makers who vibe-code. We install the tool in a real
+        game project, then tell you what broke, what shipped, and whether to keep it.
+      </p>
+    </div>
+    <div>
+      <h2>Site</h2>
+      <ul>
+        <li><a href={withBase("/")}>Home</a></li>
+        {NAV.map((item) => (
+          <li><a href={withBase(item.href)}>{item.label}</a></li>
+        ))}
+      </ul>
+    </div>
+    <div>
+      <h2>Source</h2>
+      <ul>
+        <li><a href={SITE.github}>GitHub repo</a></li>
+        <li><a href={llmsHref}>llms.txt</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="wrap legal">
+    <p>
+      © {new Date().getFullYear()} {SITE.name}. Independent lab, no parent company.
+      Sponsored items and affiliate links, when they exist, are disclosed.
+      Money cannot buy a keep verdict.
+    </p>
+  </div>
+</footer>
