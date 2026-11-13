@@ -8,6 +8,7 @@ export const SITE = {
   base: "/tried-this-week",
   origin: "https://lexxicsl.github.io/tried-this-week",
   github: "https://github.com/lexxicsl/tried-this-week",
+  beehiiv: "https://triedthisweek.beehiiv.com",
   locale: "en_US",
   lang: "en",
   themeColor: "#0e0c0a",
@@ -62,10 +63,10 @@ export const FAQ = [
   },
   {
     q: "How do I get the newsletter?",
-    a: "The signup form on this site is a placeholder until a Beehiiv or Substack list is connected. It does not collect email yet. Check back, or watch the site: issues will also be published on the web with no signup wall.",
+    a: "Use the signup form on the home page. Signups are handled by Beehiiv. You can also read past issues on Beehiiv. Every issue stays on the web with no signup wall.",
   },
   {
     q: "Can I suggest a tool to install?",
-    a: "Yes. Once the newsletter is live, every issue will end with an ask for what to install next. Until then, you can open a GitHub issue on the site repo.",
+    a: "Yes. Reply to an issue email, or open a GitHub issue on the site repo, with the tool you want installed next.",
   },
 ] as const;

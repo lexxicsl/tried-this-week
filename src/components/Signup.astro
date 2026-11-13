@@ -1,9 +1,9 @@
 ---
+import { SITE, withBase } from "../lib/site";
+
 /*
-  NEWSLETTER PLACEHOLDER
-  Swap this component for a Beehiiv or Substack embed later.
-  Look for data-newsletter-provider="placeholder".
-  Do not point this form at a live list until an account exists.
+  Beehiiv subscribe embed.
+  Attribution script lives once in src/layouts/Base.astro — do not add it here.
 */
 ---
 
@@ -11,48 +11,34 @@
   class="section"
   id="signup"
   aria-labelledby="signup-heading"
-  data-newsletter-provider="placeholder"
+  data-newsletter-provider="beehiiv"
 >
   <div class="wrap">
     <div class="signup">
       <p class="kicker">Newsletter · Mondays</p>
-      <h2 id="signup-heading">Get the lab notes when the list is live.</h2>
+      <h2 id="signup-heading">Get the lab notes every Monday.</h2>
       <p class="lead" style="margin-top: 0.85rem;">
-        One email a week. Three tools, a keep or drop, and the disclosure notes your store page will need.
-        Issues also stay on the web with no signup wall.
+        <strong>What you get.</strong> One email a week: three tools, a keep or drop, and the
+        disclosure notes your store page will need. Issues also stay on the web with no signup wall.
       </p>
-      <p class="notice" id="signup-note" role="note">
-        <strong>Signup is not connected yet.</strong>
-        This form is a clearly marked placeholder so a Beehiiv or Substack embed can replace it later.
-        It does not collect, store, or send your email.
+      <div class="signup-embed">
+        <script
+          is:inline
+          async
+          src="https://subscribe-forms.beehiiv.com/v3/loader.js"
+          data-beehiiv-form="0d0e1cdb-039a-4038-8e57-3fc70282fad9"></script>
+        <noscript>
+          <p>
+            JavaScript is required for this form. You can subscribe or
+            <a href={SITE.beehiiv}>read past issues on Beehiiv</a>.
+            Every issue also stays on the web, with no signup wall, in the
+            <a href={withBase("/issues/")}>issues archive</a>.
+          </p>
+        </noscript>
+      </div>
+      <p class="signup-aside">
+        <a href={SITE.beehiiv}>Read past issues on Beehiiv</a>
       </p>
-      <form class="signup-form" id="newsletter-form" method="post" aria-describedby="signup-note">
-        <label for="email">Email address</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          autocomplete="email"
-          placeholder="you@studio.example"
-          inputmode="email"
-          disabled
-        />
-        <button class="btn btn-primary" type="submit" disabled>Notify me later</button>
-        <p class="form-status" id="signup-status" role="status">
-          The list is not open. No email is being collected.
-        </p>
-      </form>
     </div>
   </div>
 </section>
-<script>
-  const form = document.getElementById("newsletter-form");
-  form?.addEventListener("submit", (event) => {
-    event.preventDefault();
-    const status = document.getElementById("signup-status");
-    if (status) {
-      status.textContent =
-        "Signup is still a placeholder. Your email was not sent or stored.";
-    }
-  });
-</script>
