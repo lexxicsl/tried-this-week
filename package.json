@@ -1,0 +1,25 @@
+{
+  "name": "tried-this-week",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Weekly hands-on AI tool lab for indie game makers who vibe-code.",
+  "scripts": {
+    "postinstall": "node scripts/generate-assets.mjs",
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "check": "astro check"
+  },
+  "dependencies": {
+    "@fontsource-variable/figtree": "^5.3.0",
+    "@fontsource-variable/tektur": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "astro": "^7.4.11"
+  },
+  "devDependencies": {
+    "@astrojs/check": "^0.9.12",
+    "@astrojs/sitemap": "^3.7.4",
+    "typescript": "^5.9.0"
+  }
+}
