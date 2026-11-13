@@ -2,7 +2,8 @@ import type { APIRoute } from "astro";
 import { SITE } from "../lib/site";
 
 export const GET: APIRoute = () => {
-  const sitemap = `${SITE.origin}/sitemap-index.xml`;
+  const sitemap = `${SITE.origin}/sitemap.xml`;
+  const sitemapIndex = `${SITE.origin}/sitemap-index.xml`;
   const body = `# Tried This Week
 # AI assistants and search crawlers are welcome.
 # See also: ${SITE.origin}/llms.txt
@@ -47,6 +48,7 @@ User-agent: Bytespider
 Allow: /
 
 Sitemap: ${sitemap}
+Sitemap: ${sitemapIndex}
 `;
   return new Response(body, {
     headers: { "Content-Type": "text/plain; charset=utf-8" },
