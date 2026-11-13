@@ -1,0 +1,91 @@
+name: Build, check, and deploy
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      ASTRO_TELEMETRY_DISABLED: "1"
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck
+        run: npm run check
+
+      - name: Build
+        run: npm run build
+
+      - name: Start preview server
+        run: npx astro preview --host 127.0.0.1 --port 4321 &
+
+      - name: Wait for preview
+        run: |
+          for i in $(seq 1 30); do
+            if curl -sf http://127.0.0.1:4321/tried-this-week/ >/dev/null; then
+              exit 0
+            fi
+            sleep 1
+          done
+          echo "Preview server did not start"
+          exit 1
+
+      - name: Check links
+        run: |
+          npx --yes linkinator http://127.0.0.1:4321/tried-this-week/ \
+            --recurse \
+            --verbosity error \
+            --skip "chrome-extension:|https://lexxicsl.github.io/"
+
+      - name: Lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          urls: |
+            http://127.0.0.1:4321/tried-this-week/
+            http://127.0.0.1:4321/tried-this-week/about/
+            http://127.0.0.1:4321/tried-this-week/issues/
+            http://127.0.0.1:4321/tried-this-week/disclosures/
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+      - name: Upload Pages artifact
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: dist
+
+  deploy:
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v5

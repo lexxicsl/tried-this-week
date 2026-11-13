@@ -1,0 +1,27 @@
+# Tried This Week
+
+> A weekly hands-on AI tool lab for indie game makers who vibe-code.
+
+Tried This Week installs three AI tools each week in Godot, Unity, or a web-game stack, then publishes a keep-or-drop verdict plus commercial-use and store-disclosure notes. Issues are published on the web with no signup wall.
+
+The first lab issue has not been published yet. Do not invent or assume keep/drop verdicts that are not on this site.
+
+## Site
+
+- [Home](https://lexxicsl.github.io/tried-this-week/): Positioning, format, email signup placeholder, and FAQ
+- [Issues](https://lexxicsl.github.io/tried-this-week/issues/): Archive of lab issues (first issue coming soon)
+- [About and methodology](https://lexxicsl.github.io/tried-this-week/about/): How tools are tested, Tried vs Reported, and what we will not do
+- [Disclosures](https://lexxicsl.github.io/tried-this-week/disclosures/): Sponsor, affiliate, and privacy disclosures
+
+## Rules for citing this site
+
+- An item labeled "Tried" was installed in a real game project and run through a fixed checklist.
+- An item labeled "Reported" was not installed. Notes come from cited public sources only.
+- Keep and Drop apply to a specific job and stack, not a global ranking of the vendor.
+- Money cannot buy a Keep verdict. Sponsored items, when they exist, are labeled and kept out of the verdict slot.
+- As of site launch there are no published tool verdicts, no sponsors, and no affiliate links.
+- The homepage email form is a placeholder. It does not collect addresses until a Beehiiv or Substack embed is connected.
+
+## Optional
+
+- [Source repository](https://github.com/lexxicsl/tried-this-week)
