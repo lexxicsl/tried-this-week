@@ -1,0 +1,293 @@
+---
+import Base from "../layouts/Base.astro";
+import { SITE, absoluteUrl, withBase } from "../lib/site";
+
+// --- Launch switches ---------------------------------------------------------
+// Replace with the real checkout URL (Lemon Squeezy / Gumroad / Payhip) at launch.
+const CHECKOUT_URL = "#checkout-pending";
+const CHECKOUT_LIVE = !CHECKOUT_URL.startsWith("#");
+const LAUNCH_PRICE = "19.00";
+const REGULAR_PRICE = "24.00";
+// Keep the page out of search results until people can actually buy it.
+const NOINDEX = !CHECKOUT_LIVE;
+
+const KIT = {
+  name: "Godot Ship Kit",
+  version: "0.1.0",
+  testedOn: "Godot 4.7.2-stable",
+  testedDate: "2026-11-13",
+};
+
+const title = "Godot Ship Kit: tested Godot 4.7 starter for vibe-coding";
+const description =
+  "A Godot 4.7 starter project, AI-agent rules, a prompt pack and an itch.io ship checklist for indie devs who vibe-code. Stamped with the exact versions tested and a public test log. $19 launch price.";
+
+const INSIDE = [
+  {
+    tag: "Template",
+    title: "Playable core loop",
+    body: "Top-down 2D game: title screen, levels, enemies, pause menu, save/load that survives a browser reload, and an input map for keyboard and gamepad. No art needed to start.",
+  },
+  {
+    tag: "Agent rules",
+    title: "AGENTS.md, CLAUDE.md, .cursor rules",
+    body: "Plain-markdown rules tuned for Godot 4 and GDScript. They block Godot 3 syntax and raw key reads, and make the agent run the tests after every change.",
+  },
+  {
+    tag: "Prompt pack",
+    title: "11 feature prompts",
+    body: "Dash, health and i-frames, sprite swap, sound effects, settings menu, a new enemy, a tilemap level, game feel, a bug-fix template and a pre-release audit. Each one names the files to touch and the check that proves it's done.",
+  },
+  {
+    tag: "Tests",
+    title: "21 headless checks + one-command verify",
+    body: "A smoke test your agent runs in seconds, plus tools/check.sh: import, test, Web export. An optional browser test plays, pauses, saves, reloads and continues.",
+  },
+  {
+    tag: "Ship",
+    title: "SHIP.md for itch.io",
+    body: "Web export settings that run on itch.io as-is, the page and embed settings, butler push commands, and current itch.io and Steam AI-disclosure notes with source links.",
+  },
+  {
+    tag: "Proof",
+    title: "Public test log",
+    body: "Exact engine build, checksums, commands and results. What we didn't verify is listed too.",
+  },
+];
+
+const RESULTS = [
+  { check: "Headless import on Godot 4.7.2-stable", result: "Pass" },
+  { check: "Smoke test: 21 checks (input, movement, walls, pickups, save/load, levels, pause)", result: "Pass 21/21" },
+  { check: "Web export, threads off (itch.io-ready)", result: "Pass, ~10 MB zipped" },
+  { check: "Web build in Chrome: play, pause, save, reload, continue", result: "Pass" },
+  { check: "Linux desktop export boots", result: "Pass" },
+  { check: "Prompt 01 (dash) applied by an AI agent, tests re-run", result: "Pass 22/22" },
+];
+
+const NOT_YET = [
+  "The rules and prompts haven't been run in Cursor, Claude Code or Codex yet. Per-tool results go in the next test run.",
+  "10 of the 11 prompts haven't been run end to end yet.",
+  "No real itch.io upload or butler push yet; the commands follow itch.io's docs.",
+  "Firefox, Safari, mobile browsers and a physical gamepad haven't been tested.",
+];
+
+const FAQS = [
+  {
+    q: "Which Godot version does it need?",
+    a: "Godot 4.7, standard build (not .NET). It was tested on 4.7.2-stable. It uses ordinary Godot 4 APIs, but other versions haven't been tested, and the test log will say when one is.",
+  },
+  {
+    q: "Does it work with Cursor, Claude Code, Codex or Grok?",
+    a: "The agent rules are plain markdown files that any of them can read: AGENTS.md, CLAUDE.md and a .cursor rules file. We haven't yet run the kit inside each of those tools. Those results go in the public test log, with tool versions, as soon as they're done.",
+  },
+  {
+    q: "What does \"tested Nov 2026\" actually mean?",
+    a: "On 13 Nov 2026 we installed the official Godot 4.7.2 build, checked its checksum, imported the project headless, ran the 21-check smoke test, exported to Web and played the build in Chrome. The test log records the commands and results, and lists what we didn't verify.",
+  },
+  {
+    q: "Do I need to know how to code?",
+    a: "You need to be comfortable opening a project in Godot and pasting prompts into an AI coding agent. The kit is built so the agent does most of the typing and the tests catch its mistakes.",
+  },
+  {
+    q: "Will it run on itch.io?",
+    a: "The Web export uses Godot's single-threaded build, so it doesn't need the special headers threaded builds require. SHIP.md walks through the upload. We tested the exported build in a browser but haven't uploaded it to itch.io yet.",
+  },
+  {
+    q: "Is there art or audio?",
+    a: "No. Everything is drawn with simple shapes, so there's nothing to license or disclose. Prompts 03 and 04 cover swapping in your own sprites and sounds.",
+  },
+  {
+    q: "Can I use it in a commercial game?",
+    a: "Yes. Use and change it in your own games, commercial or not, with no attribution required. You can't resell or redistribute the kit itself.",
+  },
+  {
+    q: "How is this different from free Godot templates?",
+    a: "Free templates give you code. This kit adds agent rules, prompts and tests built to work together, plus a dated test log showing exactly what was verified, on which versions.",
+  },
+];
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    name: `${KIT.name} (tested Nov 2026)`,
+    description,
+    sku: `godot-ship-kit-${KIT.version}`,
+    category: "Software > Game development templates",
+    brand: { "@type": "Brand", name: SITE.name },
+    url: absoluteUrl("/kit/"),
+    image: absoluteUrl(SITE.ogImage),
+    offers: {
+      "@type": "Offer",
+      price: LAUNCH_PRICE,
+      priceCurrency: "USD",
+      // Switch to InStock when CHECKOUT_URL is live.
+      availability: CHECKOUT_LIVE ? "https://schema.org/InStock" : "https://schema.org/PreOrder",
+      url: absoluteUrl("/kit/"),
+      seller: { "@type": "Organization", name: SITE.name, url: SITE.origin },
+    },
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: FAQS.map((item) => ({
+      "@type": "Question",
+      name: item.q,
+      acceptedAnswer: { "@type": "Answer", text: item.a },
+    })),
+  },
+];
+---
+
+<Base title={title} description={description} path="/kit/" jsonLd={jsonLd} noindex={NOINDEX}>
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">Godot Ship Kit · v{KIT.version} · tested {KIT.testedDate} on {KIT.testedOn}</p>
+      <h1>A Godot starter for vibe-coding, with receipts.</h1>
+      <p class="lead">
+        A playable Godot 4.7 template, agent rules, an 11-prompt pack, and a ship-to-itch.io checklist,
+        built for indie devs who vibe-code. It's stamped with the exact versions we tested, and the test
+        log shows what we ran and what we didn't.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href={CHECKOUT_URL} data-checkout>
+          Buy the kit · ${LAUNCH_PRICE.replace(".00", "")} launch price
+        </a>
+        <a class="btn btn-ghost" href="#test-log">See the test log</a>
+      </div>
+      <p class="price-note">
+        Launch price ${LAUNCH_PRICE.replace(".00", "")}, then ${REGULAR_PRICE.replace(".00", "")}. One-time
+        payment, instant download.
+      </p>
+      {
+        !CHECKOUT_LIVE && (
+          <p id="checkout-pending" class="notice">
+            <strong>Checkout isn't open yet.</strong> Get the newsletter to hear when it opens:{" "}
+            <a href={`${withBase("/")}#signup`}>sign up on the home page</a>.
+          </p>
+        )
+      }
+    </div>
+  </header>
+
+  <section class="section" aria-labelledby="inside-heading" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="kicker">What's inside</p>
+          <h2 id="inside-heading">Template, rules, prompts, tests, ship checklist.</h2>
+        </div>
+      </div>
+      <div class="cards">
+        {
+          INSIDE.map((item) => (
+            <article class="card">
+              <p class="card-index">{item.tag}</p>
+              <h3>{item.title}</h3>
+              <p>{item.body}</p>
+            </article>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="test-log" aria-labelledby="log-heading" style="padding-top: 0;">
+    <div class="wrap prose">
+      <p class="kicker">Test log summary · run 1 · {KIT.testedDate}</p>
+      <h2 id="log-heading">What we ran, and what we didn't.</h2>
+      <p>
+        Official {KIT.testedOn} Linux build and export templates, checksums matched against Godot's
+        published SHA-512 list. Headless Linux machine. Browser test in headless Chrome 156 with
+        software WebGL.
+      </p>
+      <table class="log-table">
+        <thead>
+          <tr><th scope="col">Check</th><th scope="col">Result</th></tr>
+        </thead>
+        <tbody>
+          {RESULTS.map((r) => (<tr><td>{r.check}</td><td class="pass">{r.result}</td></tr>))}
+        </tbody>
+      </table>
+      <p>
+        <strong>One bug caught by the tests:</strong> levels didn't advance after the last coin
+        because of the order in which the coin removed itself. It was fixed before release, and the
+        smoke test now covers it.
+      </p>
+      <h3>Not verified yet</h3>
+      <ul>
+        {NOT_YET.map((n) => <li>{n}</li>)}
+      </ul>
+      <p>
+        The full log ships with the kit as TEST_LOG.md. New runs get added to it and summarized here.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="updates-heading" style="padding-top: 0;">
+    <div class="wrap prose">
+      <p class="kicker">Coming later</p>
+      <h2 id="updates-heading">Kit updates</h2>
+      <p>
+        Godot and AI coding tools change every month. We plan an optional $6/month tier that re-runs
+        the whole test log on the latest releases and ships the fixes. It isn't available yet, and
+        buying the kit doesn't sign you up for anything.
+      </p>
+    </div>
+  </section>
+
+  <section class="section" aria-labelledby="faq-heading" style="padding-top: 0;">
+    <div class="wrap">
+      <div class="section-head">
+        <div>
+          <p class="kicker">FAQ</p>
+          <h2 id="faq-heading">Questions before you buy</h2>
+        </div>
+      </div>
+      <div class="faq-list">
+        {
+          FAQS.map((item) => (
+            <details>
+              <summary>{item.q}</summary>
+              <p>{item.a}</p>
+            </details>
+          ))
+        }
+      </div>
+      <div class="actions" style="margin-top: 2rem;">
+        <a class="btn btn-primary" href={CHECKOUT_URL} data-checkout>
+          Buy the kit · ${LAUNCH_PRICE.replace(".00", "")}
+        </a>
+        <a class="btn btn-ghost" href={withBase("/disclosures/")}>Disclosures</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .price-note {
+    margin-top: 0.75rem;
+    opacity: 0.8;
+    font-size: 0.95rem;
+  }
+  #checkout-pending {
+    margin-top: 1rem;
+  }
+  .log-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0 1.5rem;
+    font-size: 0.95rem;
+  }
+  .log-table th,
+  .log-table td {
+    text-align: left;
+    padding: 0.55rem 0.6rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    vertical-align: top;
+  }
+  .log-table td.pass {
+    white-space: nowrap;
+    font-family: "IBM Plex Mono", ui-monospace, monospace;
+  }
+</style>
