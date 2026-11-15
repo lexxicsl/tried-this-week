@@ -3,13 +3,13 @@ import Base from "../layouts/Base.astro";
 import { SITE, absoluteUrl, withBase } from "../lib/site";
 
 // --- Launch switches ---------------------------------------------------------
-// Replace with the real checkout URL (Lemon Squeezy / Gumroad / Payhip) at launch.
-const CHECKOUT_URL = "#checkout-pending";
+// Lemon Squeezy checkout. Keep noindex (and the sitemap filter in astro.config.mjs)
+// until the sales page is approved and merged to main.
+const CHECKOUT_URL = "https://triedthisweek.lemonsqueezy.com/checkout/buy/8076302d-1bf2-4d10-8fc0-a79ba48f67eb";
 const CHECKOUT_LIVE = !CHECKOUT_URL.startsWith("#");
 const LAUNCH_PRICE = "19.00";
 const REGULAR_PRICE = "24.00";
-// Keep the page out of search results until people can actually buy it.
-const NOINDEX = !CHECKOUT_LIVE;
+const NOINDEX = true;
 
 const KIT = {
   name: "Godot Ship Kit",
@@ -159,14 +159,6 @@ const jsonLd = [
         Launch price ${LAUNCH_PRICE.replace(".00", "")}, then ${REGULAR_PRICE.replace(".00", "")}. One-time
         payment, instant download.
       </p>
-      {
-        !CHECKOUT_LIVE && (
-          <p id="checkout-pending" class="notice">
-            <strong>Checkout isn't open yet.</strong> Get the newsletter to hear when it opens:{" "}
-            <a href={`${withBase("/")}#signup`}>sign up on the home page</a>.
-          </p>
-        )
-      }
     </div>
   </header>
 
@@ -269,9 +261,6 @@ const jsonLd = [
     margin-top: 0.75rem;
     opacity: 0.8;
     font-size: 0.95rem;
-  }
-  #checkout-pending {
-    margin-top: 1rem;
   }
   .log-table {
     width: 100%;
