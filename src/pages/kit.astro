@@ -104,6 +104,10 @@ const FAQS = [
     q: "How is this different from free Godot templates?",
     a: "Free templates give you code. This kit adds agent rules, prompts and tests built to work together, plus a dated test log showing exactly what was verified, on which versions.",
   },
+  {
+    q: "What if it doesn't work for me?",
+    a: "Full refund within 7 days, no questions asked. Just reply to your receipt email.",
+  },
 ];
 
 const jsonLd = [
@@ -155,6 +159,7 @@ const jsonLd = [
         </a>
         <a class="btn btn-ghost" href="#test-log">See the test log</a>
       </div>
+      <p class="refund-note">7-day no-questions refund. Just reply to your receipt email.</p>
       <p class="price-note">
         Launch price ${LAUNCH_PRICE.replace(".00", "")}, then ${REGULAR_PRICE.replace(".00", "")}. One-time
         payment, instant download.
@@ -252,13 +257,19 @@ const jsonLd = [
         </a>
         <a class="btn btn-ghost" href={withBase("/disclosures/")}>Disclosures</a>
       </div>
+      <p class="refund-note">7-day no-questions refund. Just reply to your receipt email.</p>
     </div>
   </section>
 </Base>
 
 <style>
-  .price-note {
+  .refund-note {
     margin-top: 0.75rem;
+    opacity: 0.8;
+    font-size: 0.95rem;
+  }
+  .price-note {
+    margin-top: 0.4rem;
     opacity: 0.8;
     font-size: 0.95rem;
   }
