@@ -1,0 +1,112 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+import { SITE, absoluteUrl, withBase } from "../../lib/site";
+
+export async function getStaticPaths() {
+  const issues = await getCollection("issues");
+  return issues.map((entry) => ({ params: { slug: entry.data.slug }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const path = `/issues/${d.slug}/`;
+const url = absoluteUrl(path);
+const published = d.date.toISOString();
+const modified = (d.updated ?? d.date).toISOString();
+const dateLabel = d.date.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+  timeZone: "UTC",
+});
+
+const jsonLd = [
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    headline: d.title,
+    description: d.description,
+    datePublished: published,
+    dateModified: modified,
+    url,
+    mainEntityOfPage: { "@type": "WebPage", "@id": url },
+    image: absoluteUrl(SITE.ogImage),
+    inLanguage: "en",
+    keywords: d.tags.join(", "),
+    author: { "@type": "Organization", name: SITE.name, url: SITE.origin },
+    publisher: {
+      "@type": "Organization",
+      name: SITE.name,
+      url: SITE.origin,
+      logo: { "@type": "ImageObject", url: absoluteUrl("/favicon.svg") },
+    },
+    isAccessibleForFree: true,
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    name: `${d.title}: tools tested`,
+    itemListOrder: "https://schema.org/ItemListOrderAscending",
+    numberOfItems: d.tools.length,
+    itemListElement: d.tools.map((t, i) => ({
+      "@type": "ListItem",
+      position: i + 1,
+      name: t.name,
+      url: t.url,
+      description: `${t.label}${t.verdict ? ` · ${t.verdict}` : ""} · ${t.job} (${t.stack}). License: ${t.license}.`,
+    })),
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: SITE.origin + "/" },
+      { "@type": "ListItem", position: 2, name: "Issues", item: absoluteUrl("/issues/") },
+      { "@type": "ListItem", position: 3, name: d.title, item: url },
+    ],
+  },
+  ...(d.faq.length
+    ? [
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: d.faq.map((f) => ({
+            "@type": "Question",
+            name: f.q,
+            acceptedAnswer: { "@type": "Answer", text: f.a },
+          })),
+        },
+      ]
+    : []),
+];
+---
+
+<Base title={d.seoTitle} description={d.description} path={path} type="article" jsonLd={jsonLd} publishedTime={published}>
+  <header class="page-hero">
+    <div class="wrap">
+      <p class="kicker">Issue {String(d.issue).padStart(2, "0")} · <time datetime={published}>{dateLabel}</time></p>
+      <h1>{d.title}</h1>
+      <p class="lead">{d.brief}</p>
+      <div class="stamps">
+        {d.tools.map((t) => (
+          <span class={`stamp stamp-${(t.verdict ?? t.label).toLowerCase()}`}>{t.name}: {t.label}{t.verdict ? ` · ${t.verdict}` : ""}</span>
+        ))}
+      </div>
+    </div>
+  </header>
+
+  <section class="section" style="padding-top: 0;">
+    <article class="wrap prose">
+      {d.hasAffiliateLinks && (
+        <p class="notice"><strong>Affiliate disclosure:</strong> some links in this issue can earn us a commission. See <a href={withBase("/disclosures/")}>Disclosures</a>.</p>
+      )}
+      <Content />
+      <p>
+        <a href={withBase("/issues/")}>All issues</a> · <a href={withBase("/about/")}>How we test</a> ·
+        <a href={withBase("/disclosures/")}>Disclosures</a> · <a href={`${withBase("/")}#signup`}>Get the next issue</a>
+      </p>
+    </article>
+  </section>
+</Base>
