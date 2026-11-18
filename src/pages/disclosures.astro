@@ -22,7 +22,7 @@ const description =
     <div class="wrap prose">
       <h2>The short version</h2>
       <p>
-        <strong>The newsletter is live. Signups are handled by Beehiiv.</strong>
+        <strong>The newsletter is live. Signups are handled by Beehiiv.</strong>{" "}
         We do not have sponsors or affiliate links yet. When those exist, they will be labeled. A
         payment, a gift, or a free account cannot buy a Keep verdict or hide a Drop.
       </p>
@@ -50,6 +50,13 @@ const description =
         As of the launch of this site, <strong>there are no affiliate links</strong> on {SITE.name}.
       </p>
 
+      <h2>Our own product</h2>
+      <p>
+        We sell our own product, the <a href={withBase("/kit/")}>Godot Ship Kit</a> ($19 on <a
+        href="https://alexandelexx.itch.io/godot-ship-kit">itch.io</a>). When we mention it, that’s a
+        paid product of ours.
+      </p>
+
       <h2>Independence of verdicts</h2>
       <p>
         Keep and Drop are editorial. They describe a specific job and stack, not a global ranking.
@@ -61,9 +68,9 @@ const description =
       <p>
         Newsletter signups are handled by <strong>Beehiiv</strong>. The form on the home page is a
         Beehiiv embed. When you subscribe, Beehiiv collects and stores your email (and any related
-        delivery or analytics data they need to send the list) under
+        delivery or analytics data they need to send the list) under{" "}
         <a href="https://www.beehiiv.com/privacy">Beehiiv’s privacy policy</a>. You can unsubscribe
-        from the link in every email, or manage your subscription on
+        from the link in every email, or manage your subscription on{" "}
         <a href={SITE.beehiiv}>the Beehiiv publication</a>.
       </p>
       <p>
@@ -75,9 +82,9 @@ const description =
 
       <h2>Questions and corrections</h2>
       <p>
-        For a correction, takedown, or disclosure question, open an issue on the
-        <a href={SITE.github}>GitHub repository</a>. Related pages:
-        <a href={withBase("/about/")}>methodology</a> and the
+        For a correction, takedown, or disclosure question, open an issue on the{" "}
+        <a href={SITE.github}>GitHub repository</a>. Related pages:{" "}
+        <a href={withBase("/about/")}>methodology</a> and the{" "}
         <a href={withBase("/issues/")}>issues archive</a>.
       </p>
     </div>

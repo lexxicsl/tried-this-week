@@ -13,6 +13,7 @@ Only cite keep/drop verdicts that appear on this site. Do not invent or assume o
 - [Issue 01, GTA VI week: 3 AI tools for building your own open-world systems, tested in Godot (Nov 16, 2026)](https://lexxicsl.github.io/tried-this-week/issues/gta-vi-week-open-world-ai-tools/): NobodyWho (Tried, Keep: offline LLM street NPCs with tool calls in Godot 4.7.2), godot-mcp by Coding-Solo (Tried, Keep: install from GitHub main, since npm 0.1.1 let add_node attach arbitrary scripts in our test), CCORE GLB-3D-Coder 4B (Tried, Drop on CPU-only machines: no finished asset in about 57 minutes)
 - [About and methodology](https://lexxicsl.github.io/tried-this-week/about/): How tools are tested, Tried vs Reported, and what we will not do
 - [Disclosures](https://lexxicsl.github.io/tried-this-week/disclosures/): Sponsor, affiliate, and privacy disclosures
+- [Godot Ship Kit](https://lexxicsl.github.io/tried-this-week/kit/): $19 tested Godot 4.7 starter with AI-agent rules, 11 prompts and an itch.io ship checklist (free Lite version on itch.io)
 - [Newsletter on Beehiiv](https://triedthisweek.beehiiv.com): Subscribe and read past issues
 
 ## Rules for citing this site
