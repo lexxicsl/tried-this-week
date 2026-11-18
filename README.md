@@ -26,6 +26,7 @@ The site is configured as a project Pages site, so local and production URLs use
 - `public/llms.txt` for AI assistants, semantic HTML, and a robots policy that allows major AI crawlers
 - A GitHub Actions workflow that typechecks, builds, checks links, runs Lighthouse, and deploys to GitHub Pages
 - A Beehiiv newsletter embed on the home page (`src/components/Signup.astro`), with a site-wide Beehiiv attribution script in `src/layouts/Base.astro`
+- Cookie-free [GoatCounter](https://www.goatcounter.com/) page-view analytics, loaded once in the `<head>` of `src/layouts/Base.astro`
 
 ## Newsletter
 
