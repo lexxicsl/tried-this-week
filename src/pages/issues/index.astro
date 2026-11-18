@@ -1,9 +1,11 @@
 ---
+import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
 import { SITE, withBase } from "../../lib/site";
 
+const issues = (await getCollection("issues")).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 const description =
-  "Archive of Tried This Week issues. The first hands-on lab issue is coming soon. No keep-or-drop verdicts have been published yet.";
+  "Archive of Tried This Week issues: AI tools installed in Godot, Unity, or web-game projects, with keep-or-drop verdicts, license notes, and Steam and itch.io disclosure notes.";
 ---
 
 <Base title="Issues" description={description} path="/issues/">
@@ -12,7 +14,7 @@ const description =
       <p class="kicker">Archive</p>
       <h1>Issues</h1>
       <p class="lead">
-        Every lab issue will live here, in full, with no signup wall. You can share a link without
+        Every lab issue lives here, in full, with no signup wall. You can share a link without
         asking anyone to subscribe.
       </p>
     </div>
@@ -20,20 +22,30 @@ const description =
 
   <section class="section" style="padding-top: 0;">
     <div class="wrap">
-      <article class="coming-soon" aria-labelledby="coming-soon-heading">
-        <p class="kicker">Issue 01</p>
-        <h2 id="coming-soon-heading">First issue coming soon</h2>
-        <p>
-          We have not published a lab issue yet. When Issue 1 ships, it will include three tools
-          actually installed in Godot, Unity, or a web-game stack — or clearly labeled Reported if
-          a test could not be finished. This page will not be backfilled with unverified verdicts.
-        </p>
-        <p>
-          Want the format in the meantime? Read <a href={withBase("/about/")}>how tools are tested</a>,
-          <a href={`${withBase("/")}#signup`}>subscribe</a>, or
-          <a href={SITE.beehiiv}>read past issues on Beehiiv</a>.
-        </p>
-      </article>
+      <div class="cards">
+        {issues.map((entry) => (
+          <article class="card">
+            <p class="card-index">
+              Issue {String(entry.data.issue).padStart(2, "0")} ·
+              <time datetime={entry.data.date.toISOString()}>
+                {entry.data.date.toLocaleDateString("en-US", { year: "numeric", month: "short", day: "numeric", timeZone: "UTC" })}
+              </time>
+            </p>
+            <h3><a href={withBase(`/issues/${entry.data.slug}/`)}>{entry.data.title}</a></h3>
+            <p>{entry.data.description}</p>
+            <div class="stamps">
+              {entry.data.tools.map((t) => (
+                <span class={`stamp stamp-${(t.verdict ?? t.label).toLowerCase()}`}>{t.name}: {t.verdict ?? t.label}</span>
+              ))}
+            </div>
+          </article>
+        ))}
+      </div>
+      <p style="margin-top: 2rem;">
+        Read <a href={withBase("/about/")}>how tools are tested</a>,
+        <a href={`${withBase("/")}#signup`}>subscribe</a>, or
+        <a href={SITE.beehiiv}>read issues on Beehiiv</a>.
+      </p>
     </div>
   </section>
 </Base>
